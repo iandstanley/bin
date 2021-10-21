@@ -18,7 +18,7 @@ printmem(){
 }
 
 printload() {
-	echo -n "`uptime | cut -d ':' -f 4  | sed -e 's/,.*//' -e 's/^ //'`"
+	echo -n "`uptime | cut -d ':' -f 3  | sed -e 's/,.*//' -e 's/^ //'`"
 }
 
 printdate() {
