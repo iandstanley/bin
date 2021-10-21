@@ -25,11 +25,16 @@ printdate() {
 	echo -n "`date | cut -d ' ' -f 1-4 | cut -d ':' -f 1-2`"
 }
 
+printbatt() {
+	echo -n "`/usr/sbin/acpiconf -i 0 | grep 'Remaining capacity' | cut -w -f 3 `"
+}
+
+
 
 
 while true 
 do
-	xsetroot -name "`printdate`  `printload`/`printmem`  `printip`  `printwho`"
+	xsetroot -name "`printdate`  B:`printbatt`/L:`printload`/`printmem`  `printip`  `printwho`"
 	sleep 1
 done
 
