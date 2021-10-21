@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/sh -x
 
 xsetroot -name "resetting...."
-sleep 2
+sleep 1
 
 printip() {
 	wlan="`ifconfig wlan0  2>/dev/null | grep inet | head -n 1 | cut -d ' ' -f 2`"
@@ -13,12 +13,16 @@ printwho() {
 	echo -n "`whoami`@`hostname`"
 }
 
+printcpu(){
+	echo -n "c:`top -d 1 | grep -m 1 CPU | cut -d ',' -f 1 | cut -w  -f 2`"
+}
+
 printmem(){
-	echo `top -d 1 | grep Mem | cut -d ',' -f 6|sed s/\ Free// `
+	echo -n "m:`top -d 1 | grep Mem | cut -d ',' -f 5 |sed s/\ Free// | tr -d ' '`"
 }
 
 printload() {
-	echo -n "`uptime | cut -d ':' -f 3  | sed -e 's/,.*//' -e 's/^ //'`"
+	echo -n "l:`uptime | cut -d ':' -f 3  | sed -e 's/,.*//' -e 's/^ //'`"
 }
 
 printdate() {
@@ -26,7 +30,7 @@ printdate() {
 }
 
 printbatt() {
-	echo -n "`/usr/sbin/acpiconf -i 0 | grep 'Remaining capacity' | cut -w -f 3 `"
+	echo -n "b:`/usr/sbin/acpiconf -i 0 | grep 'Remaining capacity' | cut -w -f 3 `"
 }
 
 
@@ -34,7 +38,7 @@ printbatt() {
 
 while true 
 do
-	xsetroot -name "`printdate`  B:`printbatt`/L:`printload`/`printmem`  `printip`  `printwho`"
+	xsetroot -name "`printdate`  `printbatt`,`printload`,`printmem`,`printcpu`  `printip`  `printwho`"
 	sleep 1
 done
 
