@@ -1,0 +1,35 @@
+#!/bin/sh
+
+xsetroot -name "resetting...."
+sleep 2
+
+printip() {
+	wlan="`ifconfig wlan0  2>/dev/null | grep inet | head -n 1 | cut -d ' ' -f 2`"
+	ue="`ifconfig ue0 2> /dev/null  | grep inet | head -n 1 | cut -d ' ' -f 2`"
+	echo -n $wlan $ue 
+}
+
+printwho() {
+	echo -n "`whoami`@`hostname`"
+}
+
+printmem(){
+	echo `top -d 1 | grep Mem | cut -d ',' -f 6|sed s/\ Free// `
+}
+
+printload() {
+	echo -n "`uptime | cut -d ':' -f 4  | sed -e 's/,.*//' -e 's/^ //'`"
+}
+
+printdate() {
+	echo -n "`date | cut -d ' ' -f 1-4 | cut -d ':' -f 1-2`"
+}
+
+
+
+while true 
+do
+	xsetroot -name "`printdate`  `printload`/`printmem`  `printip`  `printwho`"
+	sleep 1
+done
+
