@@ -11,9 +11,14 @@ mimetype=$(file --mime-type -b "$trueloc")
 
 case "$mimetype" in
 
-	image/* ) feh --bg-fill $trueloc && notify-send -i "Changing wallpaper..." ;;
+	image/* ) 
+		feh --bg-fill $trueloc && \
+		notify-send -i "$trueloc" "Changing wallpaper..." ;;
 
-	inode/directory ) feh --bg-fill `find "$trueloc" -type f | grep -i '.*.\(jpg\|jpeg\|png\|gif\)' | shuf -n 1`  && notify-send -i "Random Wallpaper chosen." ;;
+	inode/directory ) 
+		find "$trueloc" -type f | grep -i '.*.\(jpg\|jpeg\|png\|gif\)' | shuf | sxiv -it && \
+		feh --bg-fill ` xclip -o `  && \
+		notify-send -i "`xclip -o`" "Selected Wallpaper chosen." ;;
 
 	*) notify-send "Error" "Not a valid image." ; exit 1;;
 esac
