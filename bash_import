@@ -1,0 +1,208 @@
+########################################
+# ENVIRONMENT VARIABLES
+########################################
+
+
+########################################
+# XDG setup
+########################################
+export XDG_CONFIG_HOME=~/.config
+export XDG_DATA_HOME=~/.local/share
+export XDG_CACHE_HOME=~/.cache
+export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
+export HISTFILE="$XDG_DATA_HOME"/bash/history
+
+
+########################################
+# SHELL OPTIONS
+########################################
+shopt -s autocd # turn on autocd
+stty -ixon      # disable flow control - to allow me to remap ^S in vim
+EDITOR=/usr/bin/vim
+set -o vi       
+
+
+########################################
+# X11 config 
+########################################
+export DISPLAY=:0.0
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+
+
+########################################
+# VIM Setup
+########################################
+# mkdir -p "$XDG_DATA_HOME"/vim/{undo,swap,backup}
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+#export VIMINIT='source "$XDG_CONFIG_HOME/vim/vimrc"'
+#export VIMINIT=\"source "${XDG_CONFIG_HOME}/vim/vimrc"\"
+
+
+########################################
+# SCREEN setup
+########################################
+export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+
+
+########################################
+#   Vim plugin manager
+#
+#   viminstallplugin        - install a vim plugin
+#   vimupdateplugins        - update plugins from git and process helptags
+#   vimlistplugins          - list vim plugins installed
+#   vimremoveplugin         - uninstall a vim plugin
+#   vimreinstallplugins     - reinstall plugins from script vimreinstallplugins.sh
+#   help_viminstallplugin   - internal help for viminstallplugin
+#
+########################################
+export DOTVIM=~/.vim
+export VIMPLUGINS=${DOTVIM}/pack/plugins/start 
+mkdir -p $VIMPLUGINS        # make if not exist silent otherwise
+help_viminstallplugin() {
+    echo "Usage:"
+    echo "       viminstallplugin    tpope/fugitive"
+    echo "       viminstallplugin    https://github.com/tpope/vim-fugitive"
+    echo "       viminstallplugin    -h | -? | --help "
+}
+
+viminstallplugin() {
+    MYARGS=$*
+    pushd $VIMPLUGINS  > /dev/null
+    export VIMGITHUB="https://github.com"
+    if [[ ! -f "vimreinstallplugins.sh" ]]; then
+        echo '#!/bin/bash' > vimreinstallplugins.sh
+        chmod +x vimreinstallplugins.sh
+    fi
+    if [[ "$MYARGS" =~ "-h" ]]; then
+        help_viminstallplugin
+    elif  [[ "$MYARGS" =~ "--help" ]]; then
+        help_viminstallplugin
+    elif  [[ "$MYARGS" =~ "-?" ]]; then
+        help_viminstallplugin
+    else  # install plugin
+        grabbase=`dirname \`dirname ${MYARGS}\``
+        case $grabbase in
+            "." )       # where MYARGS in format tpope/fugitive
+                    repo="${VIMGITHUB}/${MYARGS}"
+                    ;;
+            "${VIMGITHUB}" )       # where MYARGS in format https://github.com/tpope/fugitive
+                    repo="${MYARGS}"
+                    ;;
+            *)
+                    repo=""
+                    ;;
+        esac
+        # help 
+        if [[ "${repo}" != "" ]]; then
+            # clone repo to install vim plugin
+            git clone $repo                
+            echo "git clone ${repo}" >> vimreinstallplugins.sh
+        fi 
+    fi
+    popd > /dev/null
+}
+vimupdateplugins() {
+    pushd $VIMPLUGINS > /dev/null
+    for d in */ 
+    do
+        echo "Updating ${d}..."
+        pushd $d >/dev/null
+        git pull origin master
+        dir="`pwd`/doc"
+        doc="${dir}/doc"
+        if [[ -d $doc ]]; then 
+            echo "Updating helptags"
+            vim -c "helptags ${dir}<CR>" -c :q
+        fi
+        popd
+    done
+    popd > /dev/null
+}
+vimlistplugins() {
+    pushd $VIMPLUGINS > /dev/null
+    grep github.com/  vimreinstallplugins.sh | sed 's/^.*com\///' 
+    popd > /dev/null
+}
+vimremoveplugin() {
+    pluginname=$*
+    pushd $VIMPLUGINS > /dev/null
+    rm -rf $VIMPLUGINS/$pluginname
+    sed -i "/${pluginname}/d" $VIMPLUGINS/vimreinstallplugins.sh
+    popd > /dev/null
+}
+alias vimreinstallplugins=$VIMPLUGINS/vimreinstallplugins.sh
+
+
+########################################
+# CHEAT.SH
+########################################
+cheat() {
+        curl cheat.sh/$*
+}
+
+
+########################################
+# VIMWIKI
+########################################
+vimwiki() {
+        vim ~/vimwiki
+}
+wiki() {
+        vim ~/vimwiki/index.wiki
+}
+echo Documentation can be found in the vimwiki - run 'vimwiki' to open the wiki for editing/viewing
+
+
+########################################
+# PODCASTS
+########################################
+export PODCASTS=~/snap/newsboat/current/podcasts
+
+
+########################################
+# ASPELL
+########################################
+export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
+
+
+########################################
+# ALIASES
+########################################
+alias reddit=rtv
+alias maps='telnet mapscii.me'
+echo Use 'maps' for text based maps 
+alias thesaurus='dict -d moby-thesaurus '
+# youtube
+alias youtube='/usr/local/bin/youtube-dl '
+alias youtube2mp3='/usr/local/bin/youtube-dl -x --audio-format mp3 '
+# create alias for temperature monitoring
+alias temperature='/opt/vc/bin/vcgencmd measure_temp'
+alias temp='/opt/vc/bin/vcgencmd measure_temp'
+alias tempmonitor='while : ; do /opt/vc/bin/vcgencmd measure_temp; sleep 3;done'
+/opt/vc/bin/vcgencmd measure_temp 
+
+
+########################################
+# GPG setup
+#
+
+# export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+# alias gpg="gpg --homedir \"$XDG_DATA_HOME\"/gnupg"
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+gpg-connect-agent updatestartuptty /bye > /dev/null
+
+
+########################################
+# WGET settings
+########################################
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
+
+########################################
+########################################
+########################################
+########################################
+########################################
+

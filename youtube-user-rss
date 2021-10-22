@@ -1,0 +1,39 @@
+#!/usr/bin/zsh
+# Purpose: get the RSS feed for a YouTube page
+# Inspired By: https://eggfreckles.net/2020/01/03/youtube-rss/
+#
+# From:	Timothy J. Luoma
+# Mail:	luomat at gmail dot com
+# Date:	2020-01-17
+
+NAME="$0:t:r"
+
+if [[ -e "$HOME/.path" ]]
+then
+	source "$HOME/.path"
+else
+	PATH="$HOME/scripts:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin"
+fi
+
+for i in "$@"
+do
+
+	CHANNEL_ID=$(curl -sfLS "$i" | fgrep -i '<meta itemprop="channelId" ' | awk -F'"' '//{print $4}')
+
+	if [[ "$CHANNEL_ID" == "" ]]
+	then
+
+		echo "$NAME: no channel ID found for '$i'." >>/dev/stderr
+
+	else
+
+		echo "https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}"
+
+			# copy URL to clipboard
+		echo -n "https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}" | xclip
+
+	fi
+
+done
+
+exit 0

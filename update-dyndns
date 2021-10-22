@@ -1,0 +1,166 @@
+#!/bin/bash
+
+### Google Domains provides an API to update a DNS
+### "Synthetic record". This script updates a record with 
+### the script-runner's public IP address, as resolved using a DNS
+### lookup.
+###
+### Google Dynamic DNS: https://support.google.com/domains/answer/6147083
+### Synthetic Records: https://support.google.com/domains/answer/6069273
+
+
+if [ !  -e /usr/bin/dig ]
+then
+	echo "dig is missing ... installing ..."
+	sudo apt install -y dnsutils
+fi
+
+IP=$( dig +short myip.opendns.com @resolver1.opendns.com )
+
+#
+# SETUP CONFIGS
+#
+
+
+
+##################################
+#	HOME SERVER - DOMAINS    #
+##################################
+
+if [ $HOSTNAME == "home.jesusdiedfor.me" ]
+then
+
+echo "Updating HOME SERVER with dynamic dns ..."
+
+	# SETUP JESUSDIEDFOR.ME
+	echo "Setup jesusdiedfor.me dns ..."
+	USERNAME="qhchrOvyBPnxuNnb"
+	PASSWORD="1senGTl23o4SLR0o"
+	HOSTNAME="jesusdiedfor.me"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+	echo "    ..... done!"
+
+	# SETUP HOME.JESUSDIEDFOR.ME
+	echo "Setup home.jesusdiedfor.me dns ..."
+	USERNAME="9rDY54R2z4jfpxim"
+	PASSWORD="xUu6CTxlkLypqBIw"
+	HOSTNAME="home.jesusdiedfor.me"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+	echo "    ..... done!"
+
+
+# 	# SETUP MAIL.JESUSDIEDFOR.ME
+# 	echo "Setup mail.jesusdiedfor.me dns ..."
+# 	USERNAME="Qvq8JXoB6ND41k47"
+# 	PASSWORD="WFiyLreXZMZZxBy4"
+# 	HOSTNAME="mail.jesusdiedfor.me"
+# 	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+# 	curl -s $URL
+# 	echo "    ..... done!"
+
+
+	# SETUP MAIL.KINGDOMVALUES.BIZ
+	echo "Setup mail.kingdomvalues.biz dns ..."
+	USERNAME="6UEfgNKyPDsQAnrH"
+	PASSWORD="aeS9NJE8dU3ztBag"
+	HOSTNAME="mail.kingdomvalues.biz"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+	echo "    ..... done!"
+
+
+	# SETUP MVS.S370.ORG
+	echo "Setup mvs.s370.org dns ..."
+	USERNAME="cdlh5Yu4Cz5Ce0iw"
+	PASSWORD="mSp0Y6lTiQ15Dgsq"
+	HOSTNAME="mvs.s370.org"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+	echo "    ..... done!"
+
+
+	# SETUP IAN.WORKINGTITLE.INFO
+	echo "Setup ian.workingtitle.info dns ..."
+	USERNAME="8Gg148ExNGC9r3RC"
+	PASSWORD="wpxELZjuTwrh2UsE"
+	HOSTNAME="ian.workingtitle.info"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+	echo "    ..... done!"
+
+
+	# SETUP NEXTSTEPS.WORKINGTITLE.INFO
+	echo "Setup nextsteps.workingtitle.info dns ..."
+	USERNAME="rSQqgulx12dbf0zH"
+	PASSWORD="zeXMddMPssbRRpNa"
+	HOSTNAME="nextsteps.workingtitle.info"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+	echo "    ..... done!"
+
+
+
+fi
+
+
+##############################################
+#	MAIL SERVER box.jesusdiedor.me       #
+##############################################
+
+
+if [ $HOSTNAME == "box.jesusdiedfor.me" ]
+then
+
+echo "Updating MAIL SERVER  with dynamic dns ..."
+
+	# SETUP MAIL.JESUSDIEDFOR.ME
+	echo "Setup mail.jesusdiedfor.me dns ..."
+	USERNAME="Qvq8JXoB6ND41k47"
+	PASSWORD="WFiyLreXZMZZxBy4"
+	HOSTNAME="mail.jesusdiedfor.me"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+	echo "    ..... done!"
+
+
+	# SETUP BOX.JESUSDIEDFOR.ME
+	echo "Setup box.jesusdiedfor.me dns ..."
+	USERNAME="KYo9Vpr73S6DGVAx"
+	PASSWORD="dzwXXcRlBYPgsflQ"
+	HOSTNAME="box.jesusdiedfor.me"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+	echo "    ..... done!"
+
+
+
+
+fi
+
+##############################################
+#	PERSONAL PI WORKSTATION - DOMAINS    #
+##############################################
+
+
+if [ $HOSTNAME == "ian.jesusdiedfor.me" ]
+then
+
+echo "Updating HOME WORKSTATION  with dynamic dns ..."
+
+	# SETUP IAN.JESUSDIEDFOR.ME
+	echo "Setup ian.jesudiedfor.me dns ..." 
+	USERNAME="V7RtprkU1HGufaLE"
+	PASSWORD="PaRnibiCupS0TguA"
+	HOSTNAME="ian.jesusdiedfor.me"
+	URL="https://${USERNAME}:${PASSWORD}@domains.google.com/nic/update?hostname=${HOSTNAME}&myip=${IP}"
+	curl -s $URL
+
+
+
+fi
+
+
+
+

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+cat  <<!!
+
+The following rogue-like games are installed:
+
+    allure  
+    boohu 
+    crawl 
+    games-rogue 
+    gearhead 
+    gearhead2 
+    gearhead2-sdl 
+    gearhead-sdl 
+    hyperrogue 
+    hyperrogue-music 
+    moria 
+    nethack-console 
+    nethack-x11
+    omega-rpg 
+    powder 
+    slashem 
+    slashem-gtk 
+    slashem-x11 
+    zangband 
+
+!!
