@@ -10,7 +10,8 @@ printip() {
 }
 
 printwho() {
-	echo -n "`whoami`@`hostname`"
+	# echo -n "`whoami`@`hostname`"
+	echo -n "`hostname`"
 }
 
 printcpu(){
@@ -23,7 +24,7 @@ printmem(){
 
 printload() {
 	#echo -n "l:`uptime | cut -d ':' -f 4  | sed -e 's/,.*//' -e 's/^ //'`"
-	echo "l:`uptime | cut -d ':' -f 4  | cut -d ',' -f 1 | cut -w -f 2`"
+	echo "l:`uptime | cut -d ':' -f 3  | cut -d ',' -f 1 | cut -w -f 2`"
 
 }
 
