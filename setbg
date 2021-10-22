@@ -1,0 +1,21 @@
+#!/bin/sh -x
+
+# This script does the following:
+#	Run by itself, set the wallpaper (at X start).
+#	If given a file, set that as the new wallpaper.
+#	If given a directory, choose random file in it.
+#	If wal is installed, also generates a colorscheme.
+
+trueloc=$(readlink -f "$1") 
+mimetype=$(file --mime-type -b "$trueloc")
+
+case "$mimetype" in
+
+	image/* ) feh --bg-fill $trueloc && notify-send -i "Changing wallpaper..." ;;
+
+	inode/directory ) feh --bg-fill `find "$trueloc" -type f | grep -i '.*.\(jpg\|jpeg\|png\|gif\)' | shuf -n 1`  && notify-send -i "Random Wallpaper chosen." ;;
+
+	*) notify-send "Error" "Not a valid image." ; exit 1;;
+esac
+
+
