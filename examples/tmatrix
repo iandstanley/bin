@@ -1,0 +1,4 @@
+#!/bin/sh
+#exec  /usr/local/bin/cmatrix 
+#exec  /usr/local/bin/cmatrix -C red
+exec  /usr/local/bin/cmatrix -C magenta

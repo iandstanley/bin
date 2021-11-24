@@ -1,0 +1,5 @@
+#!/bin/sh
+
+example=$HOME/bin/examples
+
+cp $@ $example

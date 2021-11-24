@@ -19,13 +19,17 @@ printcpu(){
 }
 
 printmem(){
-	echo -n "`top -d 1 | grep Mem | cut -d ',' -f 5 |sed s/\ Free// | tr -d ' '`"
+	echo -n "`top -d 1 | grep Mem |  sed 's/ [0-9]*M\ Buf,//' | cut -d ',' -f 4 |sed s/\ Free// | tr -d ' '`"
 }
 
 printload() {
 	#echo -n "l:`uptime | cut -d ':' -f 4  | sed -e 's/,.*//' -e 's/^ //'`"
 	echo "l:`uptime | cut -d ':' -f 3  | cut -d ',' -f 1 | cut -w -f 2`"
 
+}
+
+printtime() {
+	date "+%H:%M"
 }
 
 printdate() {
@@ -42,7 +46,7 @@ printbatt() {
 
 while true 
 do
-	xsetroot -name "`printdate`  `printbatt`,`printload`,`printcpu`,`printmem`  `printip`  `printwho`"
+	xsetroot -name "`printtime` `printdate`  `printbatt`,`printload`,`printcpu`,`printmem`  `printip`  `printwho`"
 	sleep 1
 done
 

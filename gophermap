@@ -1,0 +1,31 @@
+#/bin/sh
+cat << EOF
+
+			      GOPHERMAP
+
+FORMAT (tab seperated):
+1Floodgap Home	/home	gopher.floodgap.com	70
+              \t      \t                    \t
+
+	where:
+		1			type
+		"Floodgap Home"		String to display
+		/home			selsector
+		gopher.floodgap.com	server
+		70			port
+
+			CANONICAL TYPES
+0. Text File	1. Gopher Submenu   2. CCSO Nameserver	    3. Error code 
+4. BinHex file  5. DOS file	    6. uuencoded file       7. Gopher search
+8. Telnet	9. Binary file 	    +  Mirror/Alt server (load balance)	
+g  GIF		I  Image	    T  Telnet 3270
+
+LATER GOPHER+ TYPES	:  Bitmap img	;  Movie    < Sound file		
+
+			NON-CANONICAL TYPES:
+d Doc (.DOC .PDF etc)	h  HTML file	i Info msg 	s  Sound file
+				 	(widely used)
+_____________________________________________________________________________
+
+
+EOF

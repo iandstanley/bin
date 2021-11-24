@@ -1,0 +1,10 @@
+#!/bin/sh
+
+bindir=$HOME/bin
+
+if [ "$1" = "-c" ] ; then
+	cat $bindir/lorem_cisero.txt
+else 
+	cat $bindir/lorem.txt
+fi
+

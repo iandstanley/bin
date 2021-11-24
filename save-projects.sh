@@ -22,6 +22,13 @@ get_git_url() {
 	grep url config | cut -w -f 4 >> $PROJLIST
 }
 
+save_etc_changes() {
+	cd $MYETCDIR
+	git add .
+	git commit -m "updated $PROJLIST"
+	git push 
+}
+
 get_project_dirs() {
 	find $PROJDIR -type d 
 }

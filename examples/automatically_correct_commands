@@ -1,0 +1,8 @@
+# Tcsh provides the built-in shell variable correct which attempts to correct typos in command usage. 
+
+set correct=cmd
+
+prl -v
+
+dated
+

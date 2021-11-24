@@ -1,10 +1,9 @@
-#!/bin/sh 
+#!/bin/sh  -x 
 
 #	Load git projects in ~/Projects 
 
 PROJDIR=~/Projects
 PROJLIST=~/.etc/project-list
-LOADPROJ=~/bin/load-projects.sh
 MYETCDIR=~/.etc
 ETCREPO=git@github.com:iandstanley/.etc.git
 
@@ -18,7 +17,7 @@ check_etc_exists() {
 }
 
 create_project_dir() {
-	mdkir -p $PROJDIR
+	mkdir -p $PROJDIR
 }
 
 # test if $MYETCDIR exists and clone from github if not
@@ -31,5 +30,5 @@ create_project_dir
 
 cd $PROJDIR
 
-xargs -n 1 echo "echo git clone " < .etc/project-list | sh -
+xargs -n 1 echo "git clone " < $PROJLIST | sh -
 

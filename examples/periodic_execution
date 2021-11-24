@@ -1,0 +1,25 @@
+#!/bin/tcsh
+
+# It is fairly common to want to run commands periodically based
+# upon a recurring time. This can be done by using the cron but often
+# you find you will only want to perform this on an adhoc basis.
+# 
+# This can be done easily in the tcsh by setting the shell variable
+# tperiod (to the number of minutes between executions. You will also
+# need to assign the ali'periodic' to the command you wish to run.
+# 
+# As an example we will run here the date command every minute
+
+set tperiod=1
+alias periodic date
+
+sleep 60
+
+sleep 60
+
+sleep 60
+
+sleep 60
+
+sleep 60
+

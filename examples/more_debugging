@@ -1,0 +1,13 @@
+#!/bin/tcsh
+
+# In debugging you may wish to see the return value of every execution
+# in a script. The tcsh shell allows you to set the shell variable
+# 'printexitvalue'. With this variable set tcsh reports any non-zero 
+# return value
+
+set printexitvalue
+
+ls /tmp/fictional_file
+
+du -sh
+

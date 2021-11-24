@@ -1,0 +1,8 @@
+#!/bin/csh -f
+
+echo input something
+
+set input = $<
+
+echo input is $input
+

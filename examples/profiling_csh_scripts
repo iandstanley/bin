@@ -1,0 +1,25 @@
+#!/bin/tcsh
+
+# A developer may wish to profile the commands in the script he is
+# developing. In most shells the developer has to add the time(1)
+# command to every line he wants to profile which can be a bit tedious
+# if she wants to profile most/all lines.
+# 
+# In tcsh, the developer can set the shell variable time to profile
+# EVERY command.
+ 
+
+echo Tell tcsh to profile all commands 
+
+set time
+
+echo Now run some commands
+
+date
+
+ls > /dev/null
+
+df  -h 
+
+du -sh
+ 
