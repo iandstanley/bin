@@ -1,0 +1,43 @@
+#!/bin/tcsh
+exit
+
+It makes sense to restrict the automatic Tab-completion feature
+under certain circumstances. For example, if vi is the most-used
+command in a session, then you can save time if only text files
+come up during Tab completion. Likewise, if .c and .cpp files aren’t
+yet backed up and you want to avoid accidental deletion at all cost,
+then it’s best to avoid files with .c/.cpp extensions during Tab
+completion so they aren’t deleted when you use rm followed by Tab
+completion. To prevent C/C++ file types from showing up during Tab
+completion, use set fignore=(.c .cpp .h).:
+
+
+	arpan@tintin# set autolist
+	arpan@tintin# ls
+	memory.h memory.cpp kernel.c memory.o kernel.o
+	arpan@tintin# rm m[TAB]
+	memory.h memory.cpp memory.o
+	arpan@tintin# set fignore=(.c .cpp .h)
+	arpan@tintin# rm m[TAB]
+	memory.o
+
+
+
+Another typical doomsday scenario is the accidental overwriting of
+an existing file. To prevent this from happening, always keep the
+noclobber shell variable turned on. (This variable is also available
+in the csh shell.) Note that this can only save you while you’re
+trying to redirect output to an existing file — it isn’t any help
+if you’re using cp or mv to overwrite the file.
+
+
+	arpan@tintin# ls
+	file1 file2
+	arpan@tintin# set noclobber
+	arpan@tintin# echo testing > file1
+	file1: File exists.
+	arpan@tintin# unset noclobber
+	arpan@tintin# echo testing > file1
+	arpan@tintin# cat file1
+	testing
+

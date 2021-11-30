@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 ### Google Domains provides an API to update a DNS
 ### "Synthetic record". This script updates a record with 

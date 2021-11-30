@@ -1,0 +1,3 @@
+#!/bin/sh 
+
+top -b | grep Mem | awk -F ',' '{print $(NF)}' | cut -f 2 -w

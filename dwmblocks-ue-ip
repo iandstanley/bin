@@ -1,0 +1,8 @@
+#!/bin/sh
+
+ifconfig ue0 | grep UP 1> /dev/null 2>&1
+
+if [ $? -eq 0 ]
+then
+	echo -n ETH: $(ifconfig ue0  2>/dev/null | grep inet | head -n 1 | cut -d ' ' -f 2)
+fi

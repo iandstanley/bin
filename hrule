@@ -1,0 +1,30 @@
+#!/bin/tcsh 
+
+########################################################################
+#
+#	hruler 		output a ruler to stdout
+#
+########################################################################
+
+if ( ! $?RULERWIDTH ) then
+	setenv RULERWIDTH 72
+endif
+
+if ( $1 == "-h" ) then 
+	echo "Usage:	hruler [-h] | [symbol] "
+	echo
+	echo "-h 	this message "
+	echo "symbol	alternate symbol(s); default = '#'"
+	echo
+	exit 0
+endif
+
+if ( $# == 0 ) then 
+	setenv CHAR "#"
+else
+	setenv CHAR $1
+endif 
+
+repeat $RULERWIDTH echo -n $CHAR 
+echo
+

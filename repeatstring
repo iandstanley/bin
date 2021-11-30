@@ -1,0 +1,8 @@
+#!/bin/tcsh 
+
+setenv COUNT "$1"
+shift
+setenv STRING "$argv"
+
+repeat ${COUNT} echo -n "${STRING}"
+

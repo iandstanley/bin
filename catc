@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# locate and cat file
+
+exec cat $(which "$1")

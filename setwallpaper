@@ -17,8 +17,8 @@ case "$mimetype" in
 
 	inode/directory ) 
 		find "$trueloc" -type f | grep -i '.*.\(jpg\|jpeg\|png\|gif\)' | shuf | sxiv -it && \
-		feh --bg-fill ` xclip -o `  && \
-		notify-send -i "`xclip -o`" "Selected Wallpaper chosen." ;;
+		feh --bg-fill $( xclip -o )  && \
+		notify-send -i "$(xclip -o)" "Selected Wallpaper chosen." ;;
 
 	*) notify-send "Error" "Not a valid image." ; exit 1;;
 esac

@@ -70,7 +70,7 @@ viminstallplugin() {
     pushd $VIMPLUGINS  > /dev/null
     export VIMGITHUB="https://github.com"
     if [[ ! -f "vimreinstallplugins.sh" ]]; then
-        echo '#!/bin/bash' > vimreinstallplugins.sh
+        echo '#!/local/local/bin/bash' > vimreinstallplugins.sh
         chmod +x vimreinstallplugins.sh
     fi
     if [[ "$MYARGS" =~ "-h" ]]; then
@@ -80,7 +80,7 @@ viminstallplugin() {
     elif  [[ "$MYARGS" =~ "-?" ]]; then
         help_viminstallplugin
     else  # install plugin
-        grabbase=`dirname \`dirname ${MYARGS}\``
+        grabbase=$(dirname \)dirname ${MYARGS}\))
         case $grabbase in
             "." )       # where MYARGS in format tpope/fugitive
                     repo="${VIMGITHUB}/${MYARGS}"
@@ -108,7 +108,7 @@ vimupdateplugins() {
         echo "Updating ${d}..."
         pushd $d >/dev/null
         git pull origin master
-        dir="`pwd`/doc"
+        dir="$(pwd)/doc"
         doc="${dir}/doc"
         if [[ -d $doc ]]; then 
             echo "Updating helptags"

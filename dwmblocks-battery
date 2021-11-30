@@ -1,0 +1,2 @@
+#!/bin/sh
+echo -n "b:$(/usr/sbin/acpiconf -i 0 | grep 'Remaining capacity' | cut -w -f 3 )"

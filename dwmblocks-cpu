@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo -n cpu:$(top -d 1 | grep -m 1 CPU | cut -d ',' -f 1 | cut -w  -f 2)

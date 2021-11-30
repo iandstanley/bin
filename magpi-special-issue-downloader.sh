@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # ------------------------------------------------------------------
 # [Author] joergi - https://github.com/joergi/MagPiDownloader
 #          downloader for all MagPi issues

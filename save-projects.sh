@@ -18,7 +18,7 @@ check_etc_exists() {
 }
 
 get_git_url() {
-	echo Processing = `pwd`
+	echo Processing = $(pwd)
 	grep url config | cut -w -f 4 >> $PROJLIST
 }
 
@@ -50,7 +50,7 @@ rm -f $PROJLIST
 # 	- the list of github urls (from the .git/config file)
 #	- the script ~/bin/load-projects to recreate the Projects dir
 
-for dir in `get_project_dirs`
+for dir in $(get_project_dirs)
 do
 	[ -d $dir/.git ] && process_dir	
 done

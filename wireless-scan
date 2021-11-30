@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Scan for wireless networks using device wlan0
+
+sudo ifconfig wlan0 up scan

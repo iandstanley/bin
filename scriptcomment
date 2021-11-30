@@ -1,0 +1,29 @@
+#!/bin/sh -
+
+if [ "$1" = "-h" ]
+then 
+cat <<HERE
+
+	scriptcomment	[-h] | <scriptname> [<description>]
+
+	-h	help (this text)
+	<scriptname> 	title of script 
+	<description>	description of script (optional)
+
+HERE
+
+else
+	scriptname="$1"
+	description="$2"
+
+	echo "########################################################################"
+	echo "# "
+	echo "# 	Scriptname	${scriptname}"
+	echo "# "
+	echo "# 	Description:"
+	echo "# "
+	echo "# 	${description}"
+	echo "# "
+	echo "########################################################################"
+	echo
+fi

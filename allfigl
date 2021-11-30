@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# displays 'Hello' in all the installed figlet fonts
+
+FONTDIR=/usr/local/share/figlet
+
+for font in $FONTDIR/*.flf; do
+  clear
+  echo "FONT: $font"
+  figlet -f "${font}" Hello
+  read line
+done

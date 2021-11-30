@@ -1,0 +1,2 @@
+#!/bin/sh
+nl -n ln | tr -s '\t' ' ' | sed 's/ /. /'
