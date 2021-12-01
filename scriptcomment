@@ -2,15 +2,15 @@
 
 if [ "$1" = "-h" ]
 then 
-cat <<HERE
+	cat <<-EOF
 
-	scriptcomment	[-h] | <scriptname> [<description>]
+		scriptcomment	[-h] | <scriptname> [<description>]
 
-	-h	help (this text)
-	<scriptname> 	title of script 
-	<description>	description of script (optional)
+		-h	help (this text)
+		<scriptname> 	title of script 
+		<description>	description of script (optional)
 
-HERE
+	EOF
 
 else
 	scriptname="$1"
