@@ -1,0 +1,28 @@
+#!/usr/local/bin/bash -x
+
+########################################################################
+# 
+# 	Scriptname	reddit
+# 
+# 	Description:	Reddit reader
+# 	if rtv not installed run 	pip install rtv
+# 
+########################################################################
+
+declare -a subreddit=(
+"r/archlinux"
+"r/bhyve"
+"r/bsd"
+"r/debian"
+"r/emacs"
+"r/freebsd"
+"r/freesoftware"
+"r/linux"
+"r/openbsd"
+"r/raspberrypi"
+"r/suckless"
+"r/unixporn"
+)
+
+selected=$(printf '%s\n' "${subreddit[@]}" | sort | dmenu -i -l 20 -p  'Choose subreddit:' "$@" ) || exit 1
+rtv -s $selected

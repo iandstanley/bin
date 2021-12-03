@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+declare -A conflist
+conflist[cshrc]="$HOME/.cshrc"
+conflist[dunst]="$HOME/.config/dunst/dunstrc"
+conflist[dwm]="$HOME/dwm-distrotube/config.def.h"
+conflist[dwmblocks]="$HOME/dwmblocks-distrotube/blocks.def.h"
+conflist[ssh]="$HOME/.ssh/config"
+conflist[st]="$HOME/st-distrotube/config.def.h"
+conflist[surf]="$HOME/surf-distrotube/config.def.h"
+conflist[tabbed]="$HOME/tabbed-distrotube/config.def.h"
+conflist[vi]="$HOME/.exrc"
+conflist[vifm]="$HOME/.config/vifm/vifmrc"
+conflist[vim]="$HOME/.vimrc"
+conflist[xinitrc]="$HOME/.xinitrc"
+conflist[xresources]="$HOME/.Xresources"
+
+
+selected=$(printf '%s\n' "${conflist[@]}" | sort | dmenu -i -l 20 -p  'Choose config:' "$@" ) || exit 1
+
+$EDITOR $selected 
+

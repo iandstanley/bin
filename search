@@ -1,0 +1,46 @@
+#!/usr/local/bin/bash
+
+#BROWSER="brave"
+BROWSER="surf"
+
+# Search Engines
+declare -A websearch 
+websearch[bing]="https://www.bing.com/search?q="
+websearch[brave]="https://search.brave.com/search?q="
+websearch[duckduckgo]="https://duckduckgo.com/?q="
+websearch[gemini search \(https\)]="https://portal.mozz.us/gemini/geminispace.info/search%3F"
+websearch[google]="https://www.google.com/search?q="
+websearch[qwant]="https://www.qwant.com/?q="
+websearch[swisscows]="https://swisscows.com/web?query="
+websearch[yandex]="https://yandex.com/search/?text="
+# Information/News
+websearch[googlenews]="https://news.google.com/search?q="
+websearch[wikipedia]="https://en.wikipedia.org/w/index.php?search="
+websearch[wiktionary]="https://en.wiktionary.org/w/index.php?search="
+# Social Media
+websearch[reddit]="https://www.reddit.com/search/?q="
+websearch[odysee]="https://odysee.com/$/search?q="
+websearch[youtube]="https://www.youtube.com/results?search_query="
+# Online Shopping
+websearch[amazon]="https://www.amazon.co.uk/s?k="
+websearch[craigslist]="https://www.craigslist.org/search/sss?query="
+websearch[ebay]="https://www.ebay.co.uk/sch/i.html?&_nkw="
+websearch[gumtree]="https://www.gumtree.com/search?search_category=all&q="
+# Linux
+websearch[archaur]="https://aur.archlinux.org/packages/?O=0&K="
+websearch[archpkg]="https://archlinux.org/packages/?sort=&q="
+websearch[archwiki]="https://wiki.archlinux.org/index.php?search="
+websearch[debianpkg]="https://packages.debian.org/search?suite=default&section=all&arch=any&searchon=names&keywords="
+# Development
+websearch[github]="https://github.com/search?q="
+websearch[gitlab]="https://gitlab.com/search?search="
+websearch[sourceforge]="https://sourceforge.net/directory/?q="
+websearch[stackoverflow]="https://stackoverflow.com/search?q="
+
+
+engine=$(printf '%s\n' "${!websearch[@]}" | sort | dmenu -i -l 20 -p  'Search engine:' "$@" ) || exit 1
+url="${websearch["${engine}"]}"
+query=$(echo "$engine" | dmenu -i -l 20 -p 'Enter search query:')
+
+${BROWSER} "${url}${query}"
+
