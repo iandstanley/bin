@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# What filters do I have?
+
+ls ~/bin/filters
+

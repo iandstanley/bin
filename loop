@@ -1,0 +1,30 @@
+#!/bin/sh
+
+########################################################################
+# 
+# 	Scriptname	loop
+# 
+# 	Description:
+# 
+# 	Runs a command 'n' count 
+# 
+########################################################################
+
+if [ $# -le 1  ];
+then 
+	echo "Usage:	loop <count> <command>"
+	return 1
+fi
+
+count=$1
+shift
+
+command=$@
+echo command = $command
+echo $count
+
+i=0
+while [ $i -ne $count ]  ; do
+	sh -c $command
+	i=$( echo "$i + 1" | bc)
+done
