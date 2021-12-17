@@ -1,0 +1,16 @@
+#!/bin/sh
+
+########################################################################
+# 
+# 	Scriptname	tohex
+# 
+# 	Description:
+# 
+# 	Convert stdin to hex	
+# 
+########################################################################
+
+# ensure xxd is installed (part of vim)
+[ ! -e /usr/local/bin/xxd ] && sudo pkg install -y -q vim  
+
+xxd 
