@@ -1,0 +1,5 @@
+#!/bin/sh
+
+snippets=$HOME/bin/snippets
+
+mv $@ $snippets

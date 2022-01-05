@@ -1,0 +1,7 @@
+#!/bin/sh 
+
+SNIPPET=$@
+SNIPPETDIR=$HOME/bin/snippets
+
+chmod 644 $SNIPPET
+cp  $SNIPPTER $SNIPPETDIR

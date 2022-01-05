@@ -1,0 +1,33 @@
+#!/bin/sh
+ARGV=$@
+ARGC=$#
+
+########################################################################
+# 
+# 	Scriptname	snip
+# 
+# 	Description:
+# 
+# 	A snippet tool in bash. 
+# 	Prints to stdout the template found in 	~/bin/snippets
+# 
+########################################################################
+
+SNIPPETS=~/bin/snippets
+
+usage() {
+	echo "Usage: 	snip  <snippet_name> "
+	echo "		Where <snippet_name> exists as a snippet in ${SNIPPETS}"
+	echo
+	exit 1
+}
+
+test $ARGC -ne 1 && usage 
+
+the_snippet=$1
+filepath="${SNIPPETS}/${the_snippet}"
+
+test ! -f $filepath && usage
+
+cat $filepath
+

@@ -1,5 +1,7 @@
 #!/bin/sh
 
-example=$HOME/bin/examples
+EXAMPLE=$@
+EXAMPLEDIR=$HOME/bin/examples
 
-mv $@ $example
+chmod 644 $EXAMPLE
+mv $EXAMPLE $EXAMPLEDIR

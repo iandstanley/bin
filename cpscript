@@ -1,5 +1,7 @@
 #!/bin/sh 
 
-scripts=$HOME/bin
+SCRIPT=$@
+SCRIPTDIR=$HOME/bin
 
-cp  $@ $scripts
+chmod 755 $SCRIPT
+cp  $SCRIPT $SCRIPTDIR

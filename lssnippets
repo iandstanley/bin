@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# What scripts do I have?
+
+ls ~/bin/snippets/
+

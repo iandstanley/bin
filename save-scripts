@@ -1,0 +1,11 @@
+#!/bin/sh
+
+SCRIPTS=~/bin
+
+cd $SCRIPTS
+
+git add . 
+git commit -m "scripts added"
+git push 
+
+cd - 

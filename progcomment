@@ -1,0 +1,29 @@
+#!/bin/sh -
+
+if [ "$1" = "-h" ]
+then 
+	cat <<-EOF
+
+		scriptcomment	[-h] | <program> [<description>]
+
+		-h	help (this text)
+		<program> 	title of script 
+		<description>	description of script (optional)
+
+	EOF
+
+else
+	program="$1"
+	description="$2"
+
+	echo "/*"
+	echo " *"
+	echo " *	Program		${program}"
+	echo " *"
+	echo " *	Description:"
+	echo " *"
+	echo " *	${description}"
+	echo " *"
+	echo " */"
+	echo
+fi

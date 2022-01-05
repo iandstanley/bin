@@ -1,0 +1,67 @@
+#include
+#include 
+
+int FileLock(int nFileDesc, bool bLock)
+{
+    // Define the file lock structure.
+    struct flock fl;
+    memset(&fl, 0, sizeof(fl));
+
+    // Set the mode depending on the bool passed in.
+    int mode = 0;
+    if(bLock == true)
+    {
+        // This is our exclusive lock mode (Read/Write).
+        // A shared lock (Read only) is defined by F_RDLCK
+        mode = F_WRLCK;
+    }
+    else
+    {
+        // Simply for unlocking.
+        mode = F_UNLCK;
+    }
+
+    // Now we set the fields in our lock structure.
+    // There are additional fields, but they aren't too important right now.
+    // Set the type of lock
+    fl.l_type   = mode;
+    // The starting offset. This one starts at the beginning of the file.
+    // Others are SEEK_CUR and SEEK_END
+    fl.l_whence = SEEK_SET;
+    // The relative offset from l_whence
+    fl.l_start  = 0;
+    // The length to read up to. Specifying 0 means to EOF
+    fl.l_len    = 0;
+    // The application's process ID. It's nice to set it explicitly.
+    fl.l_pid    = getpid();
+
+    // If we're locking the file, the first thing
+    // we want to do is test if it's already locked!
+    if(mode != F_UNLCK)
+    {
+        // Test the lock. What F_GETLK will do is change the l_type field
+        // in our flock structure.
+        if(fcntl(nFileDesc, F_GETLK, &fl) < 0)
+        {
+            // We'll only come in here if fcntl had a fatal error. This is a bad sign.
+            return -2;
+        }
+
+        // If l_type is not set to F_UNLCK from our fcntl call, the file is locked.
+        if(fl.l_type != F_UNLCK)
+        {
+            return -1; // File is locked
+        }
+
+        fl.l_type = mode;   // Set it back to what we want to do.
+    }    // Now we actually lock/unlock the file with F_SETLK
+    if(fcntl(nFileDesc, F_SETLK, &fl) == 0)
+    {
+        return 0;    // Success!
+    }
+    else
+    {
+        return -2; // fcntl error. Again, not good.
+    }
+}
+

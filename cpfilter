@@ -1,5 +1,7 @@
 #!/bin/sh
 
-filters=$HOME/bin/filters
+FILTER=$@
+FILTERDIR=$HOME/bin/filters
 
-cp $@ $filters
+chmod 755 $FILTER
+cp $FILTER $FILTERDIR

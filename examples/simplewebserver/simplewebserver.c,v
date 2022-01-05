@@ -1,0 +1,256 @@
+head	1.2;
+access;
+symbols;
+locks
+	ian:1.2; strict;
+comment	@ * @;
+
+
+1.2
+date	2022.01.05.18.58.18;	author ian;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2022.01.05.17.03.36;	author ian;	state Exp;
+branches;
+next	;
+
+
+desc
+@initial version
+@
+
+
+1.2
+log
+@added CTRL-\ to quit
+added WWWROOT in source code
+@
+text
+@/*
+ *
+ *	Program		simplewebserver.c
+ *
+ *	Description:
+ *
+ *	A simple webserver in C 
+ *
+ */
+
+#include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
+#include	<unistd.h>
+#include 	<signal.h>
+#include	<sys/socket.h>
+#include 	<netinet/in.h>
+#include	<arpa/inet.h>
+#include	<stdbool.h>
+#include	<limits.h>
+
+#define		SERVERPORT	8989
+#define		BUFSIZE		4096
+#define		SOCKETERROR	(-1)
+#define		SERVER_BACKLOG	100
+
+char WWWROOT[]=".";
+
+typedef struct sockaddr_in SA_IN;
+typedef	struct sockaddr	SA;
+
+//prototypes
+void * handle_connection(int);
+int check(int exp, const char *msg);
+int accept_new_connection(int server_socket);
+int setup_server(short port, int backlog);
+
+//volatile sig_atomic_t stop;
+volatile int stop;
+
+void inthand(int signo) {
+	printf("wants to quit\n");
+	stop = 1;
+}
+
+int main(int argc, char **argv)
+{
+
+	int server_socket = setup_server(SERVERPORT, SERVER_BACKLOG);
+
+	signal(SIGQUIT, inthand);
+
+	printf("Use CTRL-\\ to quit\n");
+
+	while (!stop) {
+
+		printf("Waiting for connections...\n");
+
+		printf("stop = %d\n", stop);
+
+		// wait for, and eventually accept an incoming connection
+		int client_socket = accept_new_connection(server_socket);
+
+		// do whatever we do with the connections
+		handle_connection(client_socket);
+
+	sleep(1);
+
+	}
+
+	printf("Closing down...\n");
+
+	shutdown(server_socket,2);
+/* 	close(server_socket); */
+	return 0;
+}
+
+
+int setup_server(short port, int backlog) {
+
+	int server_socket, client_socket, addr_size;
+	SA_IN server_addr;
+
+	check( (server_socket = socket(AF_INET, SOCK_STREAM, 0) ), 
+		"Failed to create socket");
+
+	// initialize the address struct
+	server_addr.sin_family = AF_INET;
+	server_addr.sin_addr.s_addr = INADDR_ANY;
+	server_addr.sin_port = htons(port);
+
+	check( bind(server_socket, (SA*)&server_addr, sizeof(server_addr) ), 
+		"Bind Failed!");
+
+	check( listen(server_socket, backlog), 
+		"Listen Failed!");
+
+	return server_socket;
+}
+
+int accept_new_connection(int server_socket) {
+
+	int addr_size = sizeof(SA_IN);
+	int client_socket;
+	SA_IN client_addr;
+
+	check( client_socket = accept( server_socket, (SA*)&client_addr, 
+					(socklen_t*)&addr_size), 
+					"Accept Failed!" );
+
+	return client_socket;
+}
+
+int check(int exp, const char *msg) {
+
+	if (exp == SOCKETERROR) {
+		perror(msg);
+			exit(1);
+	}
+	
+	return exp;
+}
+
+
+void * handle_connection(int client_socket) {
+
+	char  buffer[BUFSIZE];
+	size_t bytes_read;
+	int msgsize = 0;
+	char actualpath[PATH_MAX+1];
+	//char filepath[PATH_MAX+1];
+	char * url;
+	char * filepath;
+
+
+	filepath = malloc(sizeof(char) * BUFSIZE );
+
+	// read the client's message -- the name of the file to read
+
+	while ((bytes_read = read(client_socket, buffer+msgsize, sizeof(buffer)-msgsize-1 ))) {
+		msgsize += bytes_read;
+		if (msgsize > BUFSIZE-1 || buffer[msgsize-1] == '\n') break; 
+	}
+
+	check(bytes_read, "recv error");
+	buffer[msgsize-2] = 0; 	// null terminate the message and remove the \r\n
+
+	printf("REQUEST: %s\n", buffer);
+	fflush(stdout);
+
+	// get url from buffer
+	printf("buffer+4 before validity check = %s\n", buffer+4);
+
+	strtok(buffer, " "); 			// drop 'GET ' from url
+	url = strtok(NULL, " ");		// drop protocol from end 
+						// leaving url
+	printf("url = %s\n", url);
+
+
+
+
+
+
+	sprintf(filepath, "%s%s", WWWROOT, url);
+
+
+
+
+
+
+
+
+	// validity check
+	if ( realpath( filepath, actualpath ) == NULL ){
+	//if ( realpath( buffer+4, actualpath ) == NULL ){
+		printf("ERROR(bad path): %s\n", buffer);
+		close(client_socket);
+		return NULL;
+	}
+
+	// read file and send its contents to client
+	FILE *fp = fopen(actualpath, "r");
+	
+	if ( fp == NULL ) {
+		printf("ERROR(open): %s\n", buffer);
+		close(client_socket);
+		return NULL;
+	}
+
+	// read file contents an send them to client
+	// note this is a fine example program, but rather insecure.
+	// a real program would probably limit the client to certain files
+
+	while (( bytes_read = fread(buffer, 1, BUFSIZE, fp)) > 0) {
+		// printf("sending %zu bytes\n", bytes_read);
+		write(client_socket, buffer, bytes_read);
+	}
+
+	close(client_socket);
+	fclose(fp);
+	printf("Closing connection\n");
+	return NULL;
+}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d7 1
+a7 1
+ *	A simple webserver in C - J.Sorber
+d27 2
+d131 3
+d135 3
+d151 2
+d154 4
+a157 1
+	printf("buffer = %s\n", buffer);
+d159 14
+d174 2
+a175 1
+	if ( realpath( strtok(buffer+4, " "), actualpath ) == NULL ){
+@
