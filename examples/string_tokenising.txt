@@ -1,0 +1,40 @@
+
+# TOKENISING STRINGS IN C
+
+In C 'strtok' has some problems:
+
+ • to use it requires 2+ system calls
+ • 'strtok' is NOT THREAD-SAFE as it uses static local variables which could cause crashes, memory corruption etc.
+
+However, we have 2 alternatives: 'strtok_r' and 'strsep'
+
+A stroktok_r example:
+
+	char str[] = "This is a test";
+	char *token, *rest;
+	
+	rest = str;
+
+	while ((token = strtok_r(rest, " ", &rest) )) {
+		printf("token = %s\n", token);
+	}
+
+
+A strsep example:
+
+	char str[] = "This is a test";
+	char *token;
+
+	while (( token = strsep(&str, " ")) != NULL )
+		printf("token = %s\n", token);
+	}
+
+
+NOTES:
+
+ • All 3 functions are DESTRUCTIVE so cannot be used with constants ... use 'strdup' to duplicate on heap.
+
+ • 'strtok' and 'strtok_r' are part of ANSI. Whereas 'strsep' is included in GNU and CLANG standard library but may not be included in other compiler's libraries.
+
+ • 'strtok_r' and 'strsep' allow you to set multiple delimeters. 'strtok_r' and 'strtok' will ignore repeating delimeters whilst 'strsep' will return EMPTY delimeted tokens.
+
