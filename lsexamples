@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# What examples do I have?
+
+ls ~/bin/examples
+
