@@ -32,3 +32,27 @@ int main() {
 	closelog();
 
 }
+
+	/*	
+	
+		NOTE:
+		
+		You cannot add a new facility to the syslog system as this
+		would require changing the syslog.h and the standard library.
+		
+		Most if not all syslog daemons would also need to be changed
+		as they would see other facilities as faulty.
+		
+		Developers are advised to use LOCAL0 ... LOCAL7 facilities
+		instead. 
+		
+		It is possible however to modify /etc/syslog.conf to redirect
+		the LOCAL0 ... LOCAL7 facilities to different files.
+		
+		For example, to send all your LOCAL0 application logs to 
+		the log /var/log/local0 add the following to your config
+		file /etc/syslog.conf:
+		
+		local0.*                                        /var/log/local0
+		
+	*/
