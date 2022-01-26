@@ -1,0 +1,2 @@
+#!/bin/sh
+lynx /usr/local/share/doc/freebsd/en/books/developers-handbook/book.html

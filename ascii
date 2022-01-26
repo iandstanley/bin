@@ -1,0 +1,3 @@
+#!/bin/sh
+more /usr/share/misc/ascii
+

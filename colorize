@@ -1,0 +1,2 @@
+#!/bin/sh
+spc $1 | more -r

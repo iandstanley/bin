@@ -35,3 +35,31 @@ int main () {
 	printf("str token = %s\n", ptr);
 
 }
+
+
+	/*
+
+	$ cc strtok.c
+	
+	$ ./a.out
+	
+	Name
+	Age
+	RolNo
+	Marks
+
+	$
+
+
+
+	You can also tokenize with multiple separators.
+
+		char sep[] = " !";
+		char str[] = "This works!Great"
+		char *ptr;
+
+		ptr = strtok(str, sep);		// This
+		ptr = strtok(NULL, sep);	// works
+		ptr = strtok(NULL, sep);	// Great
+
+	*/

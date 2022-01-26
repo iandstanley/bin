@@ -1,0 +1,16 @@
+#!/bin/sh 
+
+########################################################################
+# 
+# 	Scriptname	scp2gandalf
+# 
+# 	Description:	scp file/dir to gandalf
+# 
+# 	
+# 
+########################################################################
+
+for subject in $@
+do
+  scp -r $subject  ian@gandalf: 
+done
