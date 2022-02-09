@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill '/usr/home/ian/.wallpapers/star-trek/startrek04.jpeg' 

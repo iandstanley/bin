@@ -1,0 +1,12 @@
+#!/bin/sh
+
+test ! -e /usr/local/bin/go  && sudo pkg install go
+
+go install github.com/rwxrob/cmdbox-pomo/pomo@latest
+
+cp ~/go/bin/pomo ~/bin
+
+sudo rm -rf cmdbox-pomo go 
+
+which pomo
+

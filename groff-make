@@ -1,0 +1,6 @@
+#!/bin/sh
+document=$1
+pdf="$(basename -s .ms $1).pdf"
+
+groff -e -t -p -ms -T pdf $document  > $pdf
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ps -o pid,ppid,pgid,sid,comm
+

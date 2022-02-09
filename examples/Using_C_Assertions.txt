@@ -1,0 +1,99 @@
+
+USING C ASSERTIONS  (assert.h)
+""""""""""""""""""""""""""""""
+
+
+TIP #1:		KNOW THE DEFINITION
+
+	"An assertion is a boolean expression at a specific point
+	in a program that will be TRUE *unless* there is a bug in
+	the program."
+
+
+TIP #2:		USE ASSERT TO VALIDATE FUNCTION PRE-CONDITIONS
+
+	eg.
+
+	/* pre-condition:  state should be less than maximum */
+
+	void System_StateSet(SystemState_t state) {
+		assert(state < SYSTEM_STATE_MAX);
+		SystemState = State;
+	}
+
+
+TIP #3:		USE ASSERT TO VALIDATE FUNCTION POST-CONDITIONS
+
+	/* post-condition:  state should be less than maximum */
+	/* pre-condition:  state should be less than maximum */
+
+	SystemState_t  System_StateSet(SystemState_t state) {
+		assert(state < SYSTEM_STATE_MAX);
+		SystemState = state;
+
+		assert(state < SYSTEM_STATE_MAX);
+		return SystemState;
+	}
+
+
+TIP #4:		DON'T USE ASSERT FOR ERROR HANDLING
+
+	Error handling is software designed to respond to improper
+	user inputs and unexpected sequences of events;
+
+
+	Improper use of assert: 
+
+		FileReader = fopen("UserData.cfg", 'r');
+		assert(FileReader != NULL); 	// NO!!!!
+
+TIP #5: 	ASSERT IS NOT MEANT FOR PRODUCTION 
+		BUT FOR DEVELOPMENT
+
+	Enabling and disabling assert is done by using the macro
+	NDEBUG. 
+
+	Properly implemented assertions should have nearly no impact
+	on an embedded system when they are disabled.
+
+	The problem is that if testing is done with them on, then
+	turning assertions off results in shipping a product different
+	than that which was tested.
+
+	Assertions use up code space and take a few clock cycles
+	to evaluate their Boolean expression. Bare metal systems
+	with limited resources could have their execution timing
+	affected by turning off the assertions, resulting in new
+	bugs.
+
+	An alternative is to leave the assertions enabled and
+	REDIRECT their output to a system log but halting the system
+	may not be advisable.
+
+
+TIP #6:		DON'T ALLOW ASSERTIONS TO HAVE SIDE EFFECTS
+
+	The assertion expression should not alter the system state
+	or cause other side effects.
+
+
+TIP #7:		ASSERTIONS SHOULD BE 1-3% OF THE CODE
+
+	Although developers may have their own opinion on how many
+	assertions in a code base should exist ... one number that
+	can be agreed upon is > 0%.
+
+
+TIP #8:		USE ASSERTIONS AS EXECUTABLE CODE COMMENTS
+
+	Assertions make great comments. 
+
+	A nicely written expression can tell a developer exactly
+	what they should expect at a given point in the code.
+
+	Developers should articulate their assertions to give a
+	clearer understanding of what is happening in the system
+	which in turn will help decrease bugs.
+
+
+
