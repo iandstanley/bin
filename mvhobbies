@@ -11,5 +11,5 @@ HOBBIES=$@
 HOBBIESDIR=$HOME/hobbies
 
 rename_textfile $HOBBIES
-test -d $HOBBIES && chmod 755 $HOBBIES || chmod 644 $HOBBIES
+test chmod 644 $HOBBIES
 mv $HOBBIES $HOBBIESDIR
