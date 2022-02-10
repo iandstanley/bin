@@ -1,0 +1,22 @@
+#!/bin/sh
+
+########################################################################
+# 
+# 	Scriptname	remove_extension
+# 
+# 	Description:	removes the extension from a filename
+# 
+# 	
+# 
+########################################################################
+
+remove_extension() {
+	name=$1
+	echo passed $name
+	mv $name $(echo "${name%.*}")
+}
+
+for file in $@
+do
+	remove_extension $file
+done

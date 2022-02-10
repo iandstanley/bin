@@ -1,0 +1,12 @@
+#!/bin/sh
+
+get_extension() {
+
+	name=$1
+	echo "${name#*.}"
+}
+
+for file in $@
+do
+	get_extension $file
+done
