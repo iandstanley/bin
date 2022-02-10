@@ -1,18 +1,14 @@
 #!/bin/sh
-
-
 ########################################################################
 # 
-# 	Scriptname	remove-spaces
+# 	Scriptname	remove_spaces 
 # 
-# 	Description:
-# 
-# 	replaces spaces in filenames with underscores
+# 	Description:	remove spaces from filename replacing with _
 # 
 ########################################################################
 
-file1 = $1
-file2 = $(echo $file1 | tr ' ' '_')
+file=$@
+newfile="$(echo ${file} | tr [\ ] [_])"
 
-mv $file1 $file2
+mv "${file}" ${newfile}
 
