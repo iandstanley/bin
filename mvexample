@@ -1,7 +1,14 @@
 #!/bin/sh
+########################################################################
+# 
+# 	Scriptname	mvexample
+# 
+# 	Description:	mv example file to examples directory
+# 
+########################################################################
 
 EXAMPLE=$@
 EXAMPLEDIR=$HOME/bin/examples
 
-chmod 644 $EXAMPLE
+test -d $EXAMPLE && chmod 755 $EXAMPLE || chmod 644 $EXAMPLE
 mv $EXAMPLE $EXAMPLEDIR

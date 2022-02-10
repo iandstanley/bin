@@ -1,0 +1,15 @@
+#!/bin/sh
+########################################################################
+# 
+# 	Scriptname	mvrevelation
+# 
+# 	Description:	renames and moves file to my revelation dir
+# 
+########################################################################
+
+WRITING=$@
+WRITINGDIR=$HOME/writing/revelation
+
+rename_textfile $WRITING
+test -d $WRITING && chmod 755 $WRITING || chmod 644 $WRITING
+mv $WRITING $WRITINGDIR

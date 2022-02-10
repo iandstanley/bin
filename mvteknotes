@@ -1,0 +1,15 @@
+#!/bin/sh
+########################################################################
+# 
+# 	Scriptname	mvteknotes
+# 
+# 	Description:	rename and mv to teknotes dir
+# 
+########################################################################
+
+TEKNOTE=$@
+TEKNOTESDIR=$HOME/teknotes
+
+rename_textfile $TEKNOTE
+test -d $TEKNOTE && chmod 755 $TEKNOTE || chmod 644 $TEKNOTE
+mv $TEKNOTE $TEKNOTESDIR

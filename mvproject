@@ -1,0 +1,14 @@
+#!/bin/sh
+########################################################################
+# 
+# 	Scriptname	mvproject
+# 
+# 	Description:	mv to ~/Projects directory
+# 
+########################################################################
+
+PROJECT=$@
+PROJECTDIR=$HOME/Projects
+
+test -d $PROJECT && chmod 755 $PROJECT || chmod 644 $PROJECT
+mv $PROJECT $PROJECTDIR
