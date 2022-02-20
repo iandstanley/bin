@@ -10,6 +10,14 @@
 TEKNOTE=$@
 TEKNOTESDIR=$HOME/teknotes
 
-rename_textfile $TEKNOTE
-test -d $TEKNOTE && chmod 755 $TEKNOTE || chmod 644 $TEKNOTE
-mv $TEKNOTE $TEKNOTESDIR
+for note in $TEKNOTE
+do
+	rename_textfile $note
+	test -d $note && chmod 755 $note || chmod 644 $note
+	mv $note $TEKNOTESDIR
+done
+
+cd $TEKNOTESDIR
+saverepo "Added ${TEKNOTE}"
+cd -
+

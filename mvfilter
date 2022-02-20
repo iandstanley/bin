@@ -1,7 +1,19 @@
 #!/bin/sh
 
+########################################################################
+# 
+# 	Scriptname	mvfilter	
+# 
+# 	Description:	move a filter to filter directory
+# 
+########################################################################
+
 FILTER=$@
 FILTERDIR=$HOME/bin/filters
 
 chmod 755 $FILTER
 mv $FILTER $FILTERDIR
+
+cd ~/bin
+saverepo "Added filters ${FILTER}"
+cd -

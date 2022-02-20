@@ -1,7 +1,21 @@
 #!/bin/sh
 
+########################################################################
+# 
+# 	Scriptname	mvsnippet
+# 
+# 	Description:	move snippet to snippets directory
+# 
+########################################################################
+
+
 SNIPPET=$@
 SNIPPETDIR=$HOME/bin/snippets
 
 chmod 644 $SNIPPET
 mv $SNIPPET $SNIPPETDIR
+
+cd $SNIPPETDIR
+saverepo "Added snippet ${SNIPPET}"
+cd -
+

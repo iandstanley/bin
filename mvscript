@@ -1,7 +1,21 @@
 #!/bin/sh
 
+########################################################################
+# 
+# 	Scriptname	mvscript
+# 
+# 	Description:	add a script to script directory
+# 
+########################################################################
+
+
 SCRIPT=$@
 SCRIPTDIR=$HOME/bin
 
 chmod 755 $SCRIPT 
 mv $SCRIPT  $SCRIPTDIR
+
+cd $SCRIPTDIR
+saverepo "Added script ${SCRIPT}"
+cd -
+

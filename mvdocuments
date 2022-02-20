@@ -1,0 +1,14 @@
+#!/bin/sh 
+
+########################################################################
+# 
+# 	Scriptname	mvdocuments
+# 
+# 	Description:	move to documents folder
+# 
+########################################################################
+
+DOCUMENTS=~/Documents
+
+mv $@ $DOCUMENTS
+

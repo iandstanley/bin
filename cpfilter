@@ -1,7 +1,20 @@
 #!/bin/sh
 
+########################################################################
+# 
+# 	Scriptname	cpfilter
+# 
+# 	Description:	copy filter to filter directory
+# 
+########################################################################
+
 FILTER=$@
 FILTERDIR=$HOME/bin/filters
 
 chmod 755 $FILTER
 cp $FILTER $FILTERDIR
+
+cd $FILTERDIR
+saverepo "Added ${FILTER}"
+cd - 
+

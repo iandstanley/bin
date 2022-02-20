@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Create a dated text file in a specific directory and append text to it.
+# 
+# Usage:
+# 	$ addnote something you want to jot down
+# 	$ xclip -o | addnote
+# 	$ addnote		# opens editor
+# 
+# Produces:
+# 	yyyy-mm-dd.txt in your $NOTES_DIRECTORY
+
+set -e
+
+readonly NOTES_DIRECTORY="${NOTES_DIRECTORY:-~/my-notes}"
+readonly NOTES_FILE="$(date +%Y-%m-%d).txt"
+readonly NOTES_PATH="${NOTES_DIRECTORY}/${NOTES_FILE}"
+
+if [ ${#} -eq 0 ]; then
+
+	if [ -p "/dev/stdin" ]; then
+
+		(cat; printf "\n\n") >> "${NOTES_PATH}"
+	else
+		eval "$EDITOR" "${NOTES_PATH}"
+	fi
+else
+	printf "%s\n\n" "${*}" >> "${NOTES_PATH}"
+fi
+
+

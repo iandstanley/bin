@@ -12,3 +12,7 @@ EXAMPLEDIR=$HOME/bin/examples
 
 test -d $EXAMPLE && chmod 755 $EXAMPLE || chmod 644 $EXAMPLE
 mv $EXAMPLE $EXAMPLEDIR
+
+cd ~/bin
+saverepo "Added examples"
+cd -

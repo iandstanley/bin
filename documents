@@ -1,0 +1,14 @@
+#!/bin/sh 
+
+########################################################################
+# 
+# 	Scriptname	lsdocuments
+# 
+# 	Description:	list documents folder
+# 
+########################################################################
+
+DOCUMENTS=~/Documents
+
+ls $DOCUMENTS
+

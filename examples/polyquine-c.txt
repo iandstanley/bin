@@ -1,0 +1,19 @@
+
+polyquine.c is a program that prints it's own source code.
+
+
+	$ cc polyquine.c
+	$ ./a.out
+
+But why stop there ...
+
+	$ ruby polyquine.c
+
+	$ python polyquine.c
+
+	$ perl polyquine.c
+
+	$ php polquine.c
+
+Also also in C++ with older compilers!
+

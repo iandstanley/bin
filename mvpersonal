@@ -13,3 +13,4 @@ PERSONALDIR=$HOME/writing/personal
 rename_textfile $PERSONAL
 test -d $PERSONAL && chmod 755 $PERSONAL || chmod 644 $PERSONAL
 mv $PERSONAL $PERSONALDIR
+

@@ -1,0 +1,30 @@
+#!/bin/sh 
+
+########################################################################
+# 
+# 	Scriptname	lspapers
+# 
+# 	Description:	list papers in my to read folder
+# 
+# 	
+# 
+########################################################################
+
+PAPERS=~/papers
+
+papers_exist() {
+	echo
+	ls $PAPERS
+	echo
+
+	NUM_PAPERS=$(ls ${PAPERS} | wc -w)
+	echo Total papers $NUM_PAPERS
+}
+
+papers_not_found() {
+	echo Papers directory $PAPERS does not exist 
+}
+
+test -d $PAPERS && papers_exist || papers_not_found 
+
+

@@ -1,7 +1,22 @@
 #!/bin/sh 
 
+########################################################################
+# 
+# 	Scriptname	cpsnippet
+# 
+# 	Description:	copy snippet to snippet dir
+# 
+# 	
+# 
+########################################################################
+
 SNIPPET=$@
 SNIPPETDIR=$HOME/bin/snippets
 
 chmod 644 $SNIPPET
 cp  $SNIPPTER $SNIPPETDIR
+
+cd $SNIPPETDIR
+saverepo "Added ${SNIPPET}" 
+cd - 
+

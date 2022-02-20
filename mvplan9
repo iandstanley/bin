@@ -13,3 +13,4 @@ PLAN9DIR=$HOME/Plan9
 rename_textfile $PLAN9
 test -d $PLAN9 && chmod 755 $PLAN9 || chmod 644 $PLAN9
 mv $PLAN9 $PLAN9DIR
+

@@ -1,0 +1,16 @@
+#!/bin/sh
+########################################################################
+# 
+# 	Scriptname	mvpapers
+# 
+# 	Description:	renames and moves file to my papers dir
+# 
+########################################################################
+
+PAPERS=$@
+PAPERSDIR=$HOME/papers
+
+test -d $PAPERSDIR || mkdir $PAPERSDIR
+test -d $PAPERS && chmod 755 $PAPERS || chmod 644 $PAPERS
+cp $PAPERS $PAPERSDIR
+

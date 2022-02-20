@@ -1,0 +1,20 @@
+#!/bin/sh
+########################################################################
+# 
+# 	Scriptname	mvbibliography
+# 
+# 	Description:	renames and moves file to my bibliography dir
+# 
+########################################################################
+
+PAPERS=$@
+BIBLIOGRAPHY=$HOME/bibliography
+PAPERSDIR=$BIBLIOGRAPHY/2read
+
+test -d $PAPERS && chmod 755 $PAPERS || chmod 644 $PAPERS
+mv $PAPERS $PAPERSDIR
+
+cd $BIBLIOGRAPHY
+saverepo "Added $PAPERS"
+cd -
+

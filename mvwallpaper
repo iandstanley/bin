@@ -1,0 +1,14 @@
+#!/bin/sh 
+
+########################################################################
+# 
+# 	Scriptname	mvwallpaper
+# 
+# 	Description:	move to wallpaper folder
+# 
+########################################################################
+
+WALLPAPERS=~/.Wallpapers
+
+mv $@ $WALLPAPERS
+

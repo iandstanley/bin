@@ -1,0 +1,20 @@
+#!/bin/sh
+########################################################################
+# 
+# 	Scriptname	cpbibliography
+# 
+# 	Description:	copies file to my bibliography dir
+# 
+########################################################################
+
+PAPERS=$@
+BIBLIOGRAPHY=$HOME/bibliography
+PAPERSDIR=$BIBLIOGRAPHY/2read
+
+test -d $PAPERS && chmod 755 $PAPERS || chmod 644 $PAPERS
+cp $PAPERS $PAPERSDIR
+
+cd $BIBLIOGRAPHY
+saverepo "Added ${PAPERS}"
+cd -
+

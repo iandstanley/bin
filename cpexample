@@ -1,7 +1,20 @@
 #!/bin/sh
 
+########################################################################
+# 
+# 	Scriptname	cpexample	
+# 
+# 	Description:	copy example to examples dir
+# 
+########################################################################
+
+
 EXAMPLE=$@
 EXAMPLEDIR=$HOME/bin/examples
 
 chmod 644 $EXAMPLE
 cp $EXAMPLE $EXAMPLEDIR
+
+cd $EXAMPLEDIR
+saverepo "Added ${EXAMPLE}"
+cd -

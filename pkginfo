@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pkg rquery '\n\t%n\tversion=%v\n\t%c\n\n%e\n' "$1"

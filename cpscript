@@ -1,7 +1,20 @@
 #!/bin/sh 
 
+########################################################################
+# 
+# 	Scriptname	cpscript
+# 
+# 	Description:	copy script to scriptdir
+# 
+########################################################################
+
 SCRIPT=$@
 SCRIPTDIR=$HOME/bin
 
 chmod 755 $SCRIPT
 cp  $SCRIPT $SCRIPTDIR
+
+cd $SCRIPTDIR
+saverepo "Added ${SCRIPT}"
+cd -
+

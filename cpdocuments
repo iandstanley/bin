@@ -1,0 +1,14 @@
+#!/bin/sh 
+
+########################################################################
+# 
+# 	Scriptname	cpdocuments
+# 
+# 	Description:	copy to documents folder
+# 
+########################################################################
+
+DOCUMENTS=~/Documents
+
+cp $@ $DOCUMENTS
+
