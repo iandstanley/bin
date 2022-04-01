@@ -15,4 +15,4 @@ mv $EXAMPLE $EXAMPLEDIR
 
 cd ~/bin
 saverepo "Added examples"
-cd -
+cd ~
