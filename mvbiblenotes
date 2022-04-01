@@ -1,0 +1,28 @@
+#!/bin/sh -vx
+
+########################################################################
+# 
+# 	Scriptname	mvbiblenotes
+# 
+# 	Description:	moves notes to bible_notes directory in writing
+# 
+########################################################################
+
+file=$@
+BIBLENOTESDIR=$HOME/writing/bible_notes
+
+
+base=$(basename $file | cut -d '.' -f 1)
+notes=${base}".notes"
+
+# if notes file ends in .txt remove it and replace with .notes
+# if command ere
+# filename = ${file%%".txt"}".notes"
+
+test -d $notes && chmod 755 $notes || chmod 644 $notes
+mv $file ${BIBLENOTESDIR}/${notes}
+
+cd ${BIBLENOTESDIR}/..
+saverepo "Added ${notes}"
+cd - 
+
