@@ -1,0 +1,28 @@
+#!/bin/sh -vx
+
+########################################################################
+# 
+# 	Scriptname	mvrevelation_notes
+# 
+# 	Description:	moves notes to revelation directory in writing
+# 
+########################################################################
+
+file=$@
+REVNOTESDIR=$HOME/writing/revelation
+
+
+base=$(basename $file | cut -d '.' -f 1)
+notes=${base}".notes"
+
+# if notes file ends in .txt remove it and replace with .notes
+# if command ere
+# filename = ${file%%".txt"}".notes"
+
+test -d $notes && chmod 755 $notes || chmod 644 $notes
+mv $file ${REVNOTESDIR}/${notes}
+
+cd ${REVNOTESDIR}/..
+saverepo "Added ${notes}"
+cd - 
+
