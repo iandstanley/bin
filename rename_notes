@@ -1,0 +1,19 @@
+#!/bin/sh
+
+get_extension() {
+
+	name=$1
+	extension="${name#*.}"
+
+	[ "$name" = "$extension" ] && extension="notes"
+	
+	echo ${extension}
+}
+
+for file in $@
+do
+	ext="$(get_extension $file)"
+	newfile="${file%.*}.$(get_extension ${file})"
+	mv ${file} ${newfile}
+done
+
