@@ -1,0 +1,4 @@
+#!/bin/sh
+
+lower | perl -ane ' foreach $wrd ( @F ) {print ucfirst($wrd)." ";} '
+
