@@ -1,0 +1,5 @@
+#!/bin/sh
+test -e /usr/local/bin/lynx && sudo pkg update && sudo pkg install -y lynx
+
+lynx freebsd.org/handbook
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sudo dhclient re0
+
