@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# 
+# link profiles files to those in ~/bin/profiles
+# 
+
+ln -s -f ~/bin/profiles/.cshrc ~/.cshrc
+ln -s -f ~/bin/profiles/.login ~/.login
+ln -s -f ~/bin/profiles/.login-conf ~/.login-conf
+ln -s -f ~/bin/profiles/.shrc ~/.shrc
+ln -s -f ~/bin/profiles/.profile ~/.profile
