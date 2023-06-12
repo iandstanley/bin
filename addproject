@@ -1,0 +1,33 @@
+#!/bin/sh
+
+#
+# Adds a new project to the ~/Projects directory, automatically
+# pulling in from github if required
+#
+
+PROJDIR=~/Projects
+
+choice=$(dialog --menu "Choose project type" 9 40 25 1 "GitHub project" 2 "Other project" 2>&1 >/dev/tty)
+
+test $? == 1 && echo cancelled && exit
+
+
+case $choice in 
+
+	1)	echo choice 1
+		url=$(dialog --form "Github info" 12 40 4 "GitHub URL:"  1 1 "" 1 12 2000 0  2>&1 >/dev/tty)
+		test $? == 1 && echo cancelled && exit
+		cd $PROJDIR
+		git clone $url 
+		cd -
+		;;
+	2)	echo choice 2
+
+		echo get directory name
+		read -p "Enter project name: " project
+		cd $PROJDIR
+		mkdir "$project"
+		cd - 
+		;;
+esac
+
